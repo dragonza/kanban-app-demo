@@ -7,7 +7,8 @@ import createHistory from 'history/createBrowserHistory';
 import configureStore from './store/configure-store';
 import Master from './layout/master';
 import App from './app';
-import Todo from './page/todo';
+// import Todo from './page/todo';
+import KanbanApp from './page';
 
 export default function Routes() {
 	const history = createHistory();
@@ -18,8 +19,8 @@ export default function Routes() {
 			<ConnectedRouter history={history}>
 				<Master>
 					<Switch>
-						<Route exact path="/" component={App} />
-						<Route path="/todo" component={Todo} />
+						<Route exact path="/" component={KanbanApp} />
+						{/*<Route path="/todo" component={KanbanApp} />*/}
 						<Route component={() => (<div>404 Not found</div>)} />
 					</Switch>
 				</Master>
