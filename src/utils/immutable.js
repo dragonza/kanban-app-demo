@@ -33,14 +33,11 @@ function getArrayIndex(head) {
 export function set(src, path, value) {
 	invariant(!isEmpty(path), 'path is required for setting data');
 	const pathArr = pathToArray(path);
-	console.log('path: ', path);
+
 	const setImmutable = (obj, pathList, val) => {
-		console.log('obj: ', obj);
-		console.log('pathList: ', pathList);
 		if (!pathList.length) return isFunction(value) ? val(obj, pathList[0]) : val;
 		const isArr = isArray(obj);
 		const clone = isArr ? obj.slice() : Object.assign({}, obj);
-		console.log('clone: ', clone);
 		const curPath = isArr ? getArrayIndex(pathList[0]) : pathList[0];
 		clone[curPath] = setImmutable(!isUndefined(obj[curPath]) ? obj[curPath] : {}, pathList.slice(1), val);
 		return clone;
@@ -75,7 +72,7 @@ export function remove(src, path, _ids) {
 	invariant(arguments.length >= 3, 'src, path and _ids are required');
 	invariant(isArray(_ids), `Expected _ids to be an array but got ${typeof _ids}`);
 	if (isEmpty(path)) {
-		if (isArray(src)) return src.filter((i, index) => !_ids.includes(index));
+		if (isArray(src)) return src.filter((i, index) => !_ids.includes(i));
 		if (isObject(src)) return removeItems(src, _ids);
 		return src;
 	}
@@ -84,8 +81,8 @@ export function remove(src, path, _ids) {
 
 	return set(src, path, (val) => {
 		if (isArray(val)) {
-			invariant(!(_ids.some((id) => !isNumber(id))), 'Array index has to be an integer');
-			return val.filter((v, i) => !_ids.includes(i));
+			// invariant(!(_ids.some((id) => !isNumber(id))), 'Array index has to be an integer');
+			return val.filter((v, i) => !_ids.includes(v));
 		} else if (isObject(val)) {
 			const idStrList = _ids.map(String);
 			return Object.keys(val).reduce((result, k) => {
@@ -97,14 +94,23 @@ export function remove(src, path, _ids) {
 }
 
 /**
- * Toggle a value.  The target value must be boolean.
+ * Merges a value.  The target value must be an object, array, null, or undefined.
+ * If target is an object, Object.assign({}, target, param) is used.
+ * If target an array, target.concat(param) is used.
+ * If target is null or undefined, the value is simply set.
  * @param src The object to evaluate.
  * @param path The path to the value.
+ * @param val The value to merge into the target value.
  */
-export function toggle(src, path) {
+export function merge(src, path, val) {
 	return set(src, path, (curVal) => {
-		invariant(isBool(curVal), `Expected _ids to be boolean but got ${typeof curVal}`);
-		return !curVal;
+		if (curVal === null || isUndefined(curVal)) {
+			return val;
+		} else if (isArray(curVal)) {
+			return curVal.concat(val);
+		} else if (isObject(curVal)) {
+			return Object.assign({}, curVal, val);
+		}
+		return src;
 	});
 }
-
