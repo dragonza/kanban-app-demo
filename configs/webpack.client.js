@@ -77,6 +77,7 @@ module.exports = {
 							loader: 'css-loader',
 							options: {
 								minimize: isProduction,
+								sourceMap: !isProduction,
 							},
 						},
 						{

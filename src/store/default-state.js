@@ -1,16 +1,24 @@
 export default {
-	todo: {
-		todos: {
-			0: {
-				id: 0,
-				text: 'Use Redux',
-				completed: false,
-			},
-			1: {
-				id: 1,
-				text: 'Use Immutable',
-				completed: true,
-			},
+	noteList: {
+		'0': {
+			id: '0',
+			task: 'Learn React',
+		},
+		'1': {
+			id: '1',
+			task: 'Writing',
 		},
 	},
+	laneList: {
+		'0': {
+			id: '0',
+			notes: ['0'],
+			name: 'To do',
+		},
+		'1': {
+			id: '1',
+			notes: ['1'],
+			name: 'In Progress',
+		}
+	}
 };
