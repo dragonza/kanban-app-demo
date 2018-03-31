@@ -8,11 +8,15 @@ export default {
 			id: '1',
 			task: 'Writing',
 		},
+		2: {
+			id: 2,
+			task: 'test',
+		}
 	},
 	laneList: {
 		'0': {
 			id: '0',
-			notes: ['0'],
+			notes: ['0', 2],
 			name: 'To do',
 		},
 		'1': {

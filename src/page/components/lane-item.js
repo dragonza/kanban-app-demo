@@ -1,3 +1,4 @@
+// @flow
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
@@ -6,8 +7,24 @@ import { noteListByLane } from '../selectors/selectors';
 import Editable from "./editable";
 import { updateLane, attachNoteToLane, detachFromLane } from '../action/lane-action';
 import { addNote, deleteNote } from '../action/note-action';
+import type { Lane, Note } from '../types';
 
-class LaneItem extends Component {
+type Props = {
+	lane: Lane,
+	noteListByLane: Array<Note>,
+	addNote: Function,
+	deleteNote: Function,
+	detachFromLane: Function,
+	attachNoteToLane: Function,
+	updateLane: Function,
+	onDeleteLane: Function,
+}
+
+type State = {
+	editing: boolean,
+}
+
+class LaneItem extends Component<Props, State> {
 	state = {
 		editing: false,
 	}
@@ -17,6 +34,7 @@ class LaneItem extends Component {
 	}
 
 	handleSave = (text) => {
+		if (!text.length) return null;
 		const { lane } = this.props;
 		this.props.updateLane(lane.id, text);
 		this.setState({ editing: false });
@@ -33,10 +51,15 @@ class LaneItem extends Component {
 		props.detachFromLane(lane.id, id);
 	}
 
+	deleteLane = (props: Props) => {
+		const { lane } = props;
+		props.onDeleteLane(lane.id);
+		lane.notes.forEach(note => props.deleteNote([note]));
+	}
+
 	renderComponent = (props, state) => {
 		const { lane, noteListByLane } = props;
 		if (!lane) return null
-		console.log('lane: ', lane);
 		return (
 			<div className='lane-item'>
 				<div className="lane-header">
@@ -48,7 +71,7 @@ class LaneItem extends Component {
 						className='lane-header-item lane-editable'
 						onSave={(text) => this.handleSave(text)}
 					/>
-					<button className='delete-note lane-header-item'>x</button>
+					<button className='delete-note lane-header-item' onClick={() => this.deleteLane(props)}>x</button>
 				</div>
 
 				<NoteList
