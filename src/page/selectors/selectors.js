@@ -1,4 +1,4 @@
-import {createSelector} from 'reselect';
+import { createSelector } from 'reselect';
 
 export const laneListSelector = (state) => Object.values(state.laneList);
 

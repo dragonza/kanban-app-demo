@@ -1,24 +1,42 @@
-import React, {Component} from 'react';
+// @flow
+
+import React, { Component } from 'react';
 import Editable from './editable';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateNote } from "../action/note-action";
+import type { Note } from '../types';
 
-class NoteItem extends Component {
+type Props = {
+	note: Note,
+	onDeleteNote: Function,
+	updateNote: Function,
+}
+
+type State = {
+	editing: boolean,
+}
+
+class NoteItem extends Component<Props, State> {
 	state = {
 		editing: false,
 	}
+
 
 	handleOnEdit = () => {
 		this.setState({ editing: true });
 	}
 
-	handleSave = (text) => {
+	handleSave = (text: string) => {
+		if (!text.length) {
+			this.props.onDeleteNote([this.props.note.id]);
+		}
+
 		this.props.updateNote(this.props.note.id, text);
 		this.setState({ editing: false });
 	}
 
-	renderComponent = (props, state) => {
+	renderComponent = (props: Props, state: State) => {
 		const { note } = props;
 		if (!note) return null;
 		return (
