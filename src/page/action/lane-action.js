@@ -1,4 +1,4 @@
-import {SET_DATA, REMOVE_DATA, MERGE_DATA} from '../../store/data-action';
+import {SET_DATA, REMOVE_DATA, MERGE_DATA, REARRANGE_DATA} from '../../store/data-action';
 import uuid from 'uuid';
 
 const path = 'laneList';
@@ -23,6 +23,7 @@ export const updateLane = (id, text) => {
 };
 
 export const attachNoteToLane = (laneId, noteId) => {
+	console.log('attach: ');
 	return MERGE_DATA({
 		_path: `${path}.${laneId}.notes`,
 		_value: noteId,
@@ -30,6 +31,7 @@ export const attachNoteToLane = (laneId, noteId) => {
 };
 
 export const detachFromLane = (laneId, noteId) => {
+	console.log('detach: ');
 	return REMOVE_DATA({
 		_path: `${path}.${laneId}.notes`,
 		_value: noteId,
@@ -41,4 +43,21 @@ export const deleteLane = (laneId) => {
 		_path: path,
 		_value: laneId,
 	});
+}
+
+export const arrangeNote = ({ sourceNoteIndex, targetNoteIndex, laneId }) => {
+	return REARRANGE_DATA({
+		_path: `${path}.${laneId}.notes`,
+		_value: {
+			sourceNoteIndex,
+			targetNoteIndex,
+		}
+	})
+};
+
+export const moveNote = (payload) => {
+	return {
+		type: 'MOVE_NOTE',
+		...payload
+	}
 }
