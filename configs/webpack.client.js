@@ -133,7 +133,7 @@ module.exports = {
 			// within the template to be made available to the application.
 			dll: {
 				paths: Object.keys(webpackVendorCfg.entry).map((e) => {
-					return `${paths.publicPath}/${paths.DLL_FILE.replace(/\[name\]/g, e)}`.replace('//', '/');
+					return `${paths.DLL_FILE.replace(/\[name\]/g, e)}`.replace('//', '/');
 				}),
 			},
 		}),

@@ -82,7 +82,7 @@ export function remove(src, path, _ids) {
 	return set(src, path, (val) => {
 		if (isArray(val)) {
 			// invariant(!(_ids.some((id) => !isNumber(id))), 'Array index has to be an integer');
-			return val.filter((v, i) => !_ids.includes(v));
+			return val.filter((v) => !_ids.includes(v));
 		} else if (isObject(val)) {
 			const idStrList = _ids.map(String);
 			return Object.keys(val).reduce((result, k) => {
@@ -103,6 +103,7 @@ export function remove(src, path, _ids) {
  * @param val The value to merge into the target value.
  */
 export function merge(src, path, val) {
+	console.log('val: ', val);
 	return set(src, path, (curVal) => {
 		if (curVal === null || isUndefined(curVal)) {
 			return val;
@@ -113,4 +114,17 @@ export function merge(src, path, val) {
 		}
 		return src;
 	});
+}
+
+export function rearrange(src, path, val) {
+	const { sourceNoteIndex, targetNoteIndex } = val;
+	return set(src, path, (curVal) => {
+		const copyArr = [...curVal];
+		const movingItem = curVal[sourceNoteIndex];
+		copyArr.splice(sourceNoteIndex, 1);
+		copyArr.splice(targetNoteIndex, 0 ,movingItem);
+		return copyArr;
+	});
+
+
 }

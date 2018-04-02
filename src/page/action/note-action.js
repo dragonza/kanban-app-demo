@@ -26,3 +26,4 @@ export const deleteNote = (ids) => {
 		_value: ids,
 	})
 };
+

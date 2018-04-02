@@ -25,8 +25,8 @@ module.exports = {
 	appRoot: resolveApp(''),
 	appSrc: resolveApp('src'),
 	appBuild: resolveApp('build'),
-	appDev: resolveApp('build/dev'),
-	appDist: resolveApp('build/dist'),
+	appDev: resolveApp('buildDev/dev'),
+	appDist: resolveApp('build'),
 	appPublic: resolveApp('public'),
 
 	WEBPACK_CONFIG_VENDOR: resolveApp('configs/webpack.vendor'),

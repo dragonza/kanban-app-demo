@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React, {Component} from 'react';
 import LaneList from './components/lane-list';
-import { addLane, deleteLane } from './action/lane-action';
+import { addLane, deleteLane, moveNote} from './action/lane-action';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
+@DragDropContext(HTML5Backend)
 class KanbanApp extends Component {
 	handleAddLane = () => {
 		this.props.addLane('New Lane');
@@ -43,6 +46,7 @@ export default connect(
 		return bindActionCreators({
 			addLane,
 			deleteLane,
+			moveNote,
 		}, dispatch)
 	}
 )(KanbanApp);

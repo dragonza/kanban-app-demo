@@ -16,3 +16,7 @@ export type Lane = {
 
 export type Notes = { [key: string]: Note };
 export type Lanes = { [key: string]: Lane };
+
+export const ItemTypes = {
+	NOTE: 'note'
+};
