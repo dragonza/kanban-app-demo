@@ -103,7 +103,6 @@ export function remove(src, path, _ids) {
  * @param val The value to merge into the target value.
  */
 export function merge(src, path, val) {
-	console.log('val: ', val);
 	return set(src, path, (curVal) => {
 		if (curVal === null || isUndefined(curVal)) {
 			return val;

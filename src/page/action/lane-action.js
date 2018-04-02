@@ -23,7 +23,6 @@ export const updateLane = (id, text) => {
 };
 
 export const attachNoteToLane = (laneId, noteId) => {
-	console.log('attach: ');
 	return MERGE_DATA({
 		_path: `${path}.${laneId}.notes`,
 		_value: noteId,
@@ -31,7 +30,6 @@ export const attachNoteToLane = (laneId, noteId) => {
 };
 
 export const detachFromLane = (laneId, noteId) => {
-	console.log('detach: ');
 	return REMOVE_DATA({
 		_path: `${path}.${laneId}.notes`,
 		_value: noteId,

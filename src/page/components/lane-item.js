@@ -80,7 +80,6 @@ class LaneItem extends Component<Props, State> {
 	}
 
 	handleMoveNote = (payload) => {
-		console.log('payload: ', payload);
 		const { sourceId, targetId } = payload;
 		this.props.moveNote({
 			sourceId,
@@ -118,7 +117,6 @@ class LaneItem extends Component<Props, State> {
 	}
 
 	render() {
-		console.log('render: ');
 		return this.renderComponent(this.props, this.state);
 	}
 }

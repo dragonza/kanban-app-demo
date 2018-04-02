@@ -34,7 +34,6 @@ const noteSource = {
 
 const noteTarget = {
 	hover(props, monitor) {
-		console.log('note: ');
 		const sourceProps = monitor.getItem(); // current item that is being dragged
 		const targetId = props.id;// props here is the props of target element that is being dragged on
 		const sourceId = sourceProps.id;
