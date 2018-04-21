@@ -20,3 +20,8 @@ Find BoilderPlate here https://github.com/mvtnghia/web-boilerplate.git
 - Redux
 - Redux-Saga
 - React Drag and Drop
+
+## Further development
+- Drag and drop column
+- Create users
+- Integrate with back-end to save and load users database
