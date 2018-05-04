@@ -7,7 +7,6 @@ import createHistory from 'history/createBrowserHistory';
 import configureStore from './store/configure-store';
 import Master from './layout/master';
 import App from './app';
-// import Todo from './page/todo';
 
 export default function Routes() {
 	const history = createHistory();

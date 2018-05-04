@@ -72,7 +72,7 @@ export function remove(src, path, _ids) {
 	invariant(arguments.length >= 3, 'src, path and _ids are required');
 	invariant(isArray(_ids), `Expected _ids to be an array but got ${typeof _ids}`);
 	if (isEmpty(path)) {
-		if (isArray(src)) return src.filter((i, index) => !_ids.includes(i));
+		if (isArray(src)) return src.filter((i) => !_ids.includes(i));
 		if (isObject(src)) return removeItems(src, _ids);
 		return src;
 	}
@@ -124,6 +124,4 @@ export function rearrange(src, path, val) {
 		copyArr.splice(targetNoteIndex, 0 ,movingItem);
 		return copyArr;
 	});
-
-
 }
