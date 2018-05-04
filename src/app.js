@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './style/index.styl';
+import './style/index.scss';
 import KanbanApp from './page';
 
 export default function App() {
