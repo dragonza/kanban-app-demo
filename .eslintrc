@@ -30,6 +30,7 @@
 		"no-underscore-dangle": 0,
 		"no-console": [1, { "allow": ["info", "warn", "error"] }],
 		"radix": [1, "as-needed"],
+		"linebreak-style": ["error", "windows"],
 		"arrow-parens": 0,
 		"arrow-body-style": 0,
 		"global-require": 0,
