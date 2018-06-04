@@ -16,7 +16,7 @@ export default function Routes() {
 			<ConnectedRouter history={history}>
 				<Master>
 					<Switch>
-						<Route exact path="" component={App} />
+						<Route exact path="/" component={App} />
 						<Route component={() => (<div>404 Not found</div>)} />
 					</Switch>
 				</Master>

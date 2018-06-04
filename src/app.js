@@ -1,5 +1,5 @@
 import React from 'react';
-import './style/index.scss';
+import './style/index.styl';
 import KanbanApp from './page';
 
 export default function App() {

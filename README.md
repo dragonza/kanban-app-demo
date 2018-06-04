@@ -1,4 +1,4 @@
-# web-boilerplate
+# Kanban app
 This is an kanban app built on a web boilerplate
 
 Find BoilderPlate here https://github.com/mvtnghia/web-boilerplate.git
